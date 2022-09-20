@@ -1,75 +1,66 @@
-let nombreUsuario
-let edadUsuario
-let deporteElegido
-let horarioElegido
+let productos = []
 
-alert("Bienvenido al gestor de horas de Multideportes, Espacio deportivo")
-nombreUsuario = prompt("Ingrese su nombre y Apellido")
-    alert("Bienvenido" + " " + nombreUsuario)
+const selecTag = document.getElementById('lista')
 
-edadUsuario = parseInt(prompt("Ingrese su edad"))
+const cocaCola = {
+    id: 1,
+    nombre: 'Coca Cola',
+    precio: 250,
+}
+productos.push(cocaCola)
 
-if(edadUsuario >=18){
-    alert("Eres mayor de edad, a continuación podras elegir el deporte")
-} else{
-    alert("No puedes sacar turno por que eres menor de edad")
+const fanta = {
+    id: 2,
+    nombre: 'Fanta',
+    precio: 200,
+}
+productos.push(fanta)
+const pasoToros = {
+    id: 3,
+    nombre: 'Paso de los Toros',
+    precio: 180,
+}
+productos.push(pasoToros)
+const schweppes = {
+    id: 4,
+    nombre: 'schweppes',
+    precio: 280,
+}
+productos.push(schweppes)
+
+productos.forEach(productos=>{
+    const option = document.createElement("option")
+    option.innerText = `${productos.nombre}: ${productos.precio}`
+    selecTag.append(option)
+
+})
+
+let carrito = []
+
+const boton = document.createElement('button')
+boton.innerText = 'Seguir comprando'
+document.body.append(boton)
+
+const boton2 = document.createElement('button')
+boton2.innerText = 'Terminar compra'
+document.body.append(boton2)
+
+boton.onclick = () => {
+    const productoSeleccionado = productos[selecTag.selectedIndex]
+    carrito.push(productoSeleccionado)
+
+    const p = document.createElement('p')
+    p.innerText = `Ud a seleccionado ${productoSeleccionado}`
+    document.body.append(p)
 }
 
-deporteElegido = prompt("¿Tu deporte es Futbol5, Tenis o Padel?")    
-if(deporteElegido === "Futbol5")
-alert("Elegiste Futbol5")
-else if(deporteElegido === "Tenis")
-    alert("Elegiste Tenis")
-else if(deporteElegido === "Padel")
-    alert("Elegiste Padel")
-else{
-    deporteElegido = prompt("Tienes que elegir un deporte valido")
+boton2.onclick = ()=>{
+let totalCompra = 0
+carrito.forEach((prod)=>{
+    totalCompra = totalCompra + prod.precio
+})
+
+const p = document.createElement('p')
+p.innerText = `El precio total a pagar es ${totalCompra}`
+document.body.append(p)
 }
-
-    alert("Ahora indica el horario que necesitas")
-
-horarioElegido = prompt("Horarios disponibles. 19 hs , 20 hs, 21hs, 22 hs, 23hs")
-while(horarioElegido != "ESC"){
-    switch(horarioElegido){
-        case "19hs":
-            alert("Elegiste 19 hs")
-            break
-        case "20hs":
-            alert("Elegiste 20 hs")
-            break
-        case "21hs":
-            alert("Elegiste 21 hs")
-            break
-        case "22hs":
-            alert("Elegiste 22 hs")
-            break
-        case "23hs":
-            alert("Elegiste 23 hs")
-            break
-        default:
-            alert("No elegiste un horario disponible")
-            break
-    }
-    horarioElegido = prompt("Ingresa el horario que necesitas")
-}
-
-/*if(horarioElegido === "19hs")
-    alert("Elegiste el horario de las 19 hs.")
-else if(horarioElegido === "20hs")
-    alert("Elegiste el horario de las 20 hs.")
-else if(horarioElegido === "21hs")
-    alert("Elegiste el horario de las 21 hs.")
-else if(horarioElegido === "22hs")
-    alert("Elegiste el horario de las 22 hs.")
-else if(horarioElegido === "23hs")
-    alert("Elegiste el horario de las 23 hs.")*/
-
-
-
-alert(nombreUsuario + " " + "Elegiste" + " " + deporteElegido + " " + "en el horario de las" + " " + horarioElegido)
-
-
-
-
-
-
