@@ -38,29 +38,32 @@ productos.forEach(productos=>{
 let carrito = []
 
 const boton = document.createElement('button')
-boton.innerText = 'Seguir comprando'
+boton.innerText = 'Elegir producto'
 document.body.append(boton)
 
 const boton2 = document.createElement('button')
-boton2.innerText = 'Terminar compra'
+boton2.innerText = 'Finalizar compra'
 document.body.append(boton2)
 
 boton.onclick = () => {
-    const productoSeleccionado = productos[selecTag.selectedIndex]
+    let productoSeleccionado = productos[selecTag.selectedIndex]
     carrito.push(productoSeleccionado)
-
-    const p = document.createElement('p')
-    p.innerText = `Ud a seleccionado ${productoSeleccionado}`
-    document.body.append(p)
 }
 
-boton2.onclick = ()=>{
-let totalCompra = 0
-carrito.forEach((prod)=>{
-    totalCompra = totalCompra + prod.precio
-})
+const contenedorCarrito = document.getElementById("carrito")
 
-const p = document.createElement('p')
-p.innerText = `El precio total a pagar es ${totalCompra}`
-document.body.append(p)
+function renderizarCarrito(){
+    contenedorCarrito.innerHTML = ""
+    carrito.forEach((elemento)=>{
+        let div = document.createElement("div");
+        div.classList.add("producto");
+        div.innerHTML +=  ` <p>${elemento.nombre}</p>
+                            <p>PRECIO: $${elemento.precio}</p>`
+        contenedorCarrito.appendChild(div)
+    })
+    let totalPrecio = carrito.reduce((acumulador,elemento)=>acumulador+elemento.precio,0)
+    console.log(totalPrecio)
+
+    boton.innerHTML = `<p>Precio final $${totalPrecio + 0}</p>`
 }
+boton2.addEventListener("click",renderizarCarrito)
